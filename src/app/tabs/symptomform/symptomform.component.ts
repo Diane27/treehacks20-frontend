@@ -7,12 +7,24 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SymptomformComponent implements OnInit {
   @Input() onClose: () => void;
+  symptomval: string;
+  symptomtime: Date;
   constructor() { }
 
   ngOnInit() {}
 
   dismiss() {
     this.onClose()
+  }
+
+  onChange(value) {
+    console.log("This is the value:", this.symptomtime);
+    this.modalController.dismiss(this.symptomtime);
+  }
+
+  onChange(value) {
+    console.log("This is the value:", this.symptomval);
+    this.modalController.dismiss(this.symptomval);
   }
 
 }

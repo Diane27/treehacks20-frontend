@@ -27,7 +27,7 @@ export class TabsPage {
     });
 
     await modal.present();
-    
+
   }
 
   async openmod_two() {
@@ -37,12 +37,15 @@ export class TabsPage {
         onClose: this.onClose.bind(this)
       }
     });
-
+    modal.onDidDismiss()
+      .then((data) => {
+        console.log(data['data']);
+    });
     await modal.present();
   }
 
-  onClose(data) {
-    this.modalController.dismiss(data);
+  onClose() {
+    this.modalController.dismiss();
   }
 
   async openmod_three() {

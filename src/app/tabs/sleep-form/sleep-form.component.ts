@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ModalController } from "@ionic/angular";
 
 @Component({
   selector: 'app-sleep-form',
@@ -7,13 +8,21 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SleepFormComponent implements OnInit {
   @Input() onClose: () => void;
-  constructor() { }
+  sleeptime: string;
+  constructor(private modalController: ModalController) { }
 
   ngOnInit() {}
 
   dismiss() {
     this.onClose()
   }
+
+  onChange(value) {
+    console.log("This is the value:", this.sleeptime);
+    this.modalController.dismiss(this.sleeptime);
+  }
+
+
 
 }
 
