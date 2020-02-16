@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
+import { auth } from 'firebase/app';
 
 interface User {
   email?: string;
@@ -34,18 +35,21 @@ export class LoginPage implements OnInit {
   }
 
   async login(){
-    await this.afAuth.auth.signInWithEmailAndPassword( this.user.email, this.user.password)
-    .then( user => {
-      this.router.navigate(['home'])
-    })
+    await this.afAuth.auth.setPersistence(auth.Auth.Persistence.LOCAL).then(() => {
+      this.afAuth.auth.signInWithEmailAndPassword( this.user.email, this.user.password)
+      .then( user => {
+        this.router.navigate(['home']);
+      })
+    });
   }
 
   async createAccount() {
-    await this.afAuth.auth.createUserWithEmailAndPassword( this.user.email, this.user.password)
-    .then( user => {
-      this.router.navigate(['home']);
-    })
-    console.log(this.activeUser);
+    await this.afAuth.auth.setPersistence(auth.Auth.Persistence.LOCAL).then(() => {
+      this.afAuth.auth.createUserWithEmailAndPassword( this.user.email, this.user.password)
+      .then( user => {
+        this.router.navigate(['home']);
+      })
+    });
   }
 
 }
