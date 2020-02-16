@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-trigger-form',
@@ -6,9 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./trigger-form.component.scss'],
 })
 export class TriggerFormComponent implements OnInit {
-
+  @Input() onClose: () => void;
   constructor() { }
 
   ngOnInit() {}
+
+  dismiss() {
+    this.onClose()
+  }
 
 }

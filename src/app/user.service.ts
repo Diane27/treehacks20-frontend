@@ -15,7 +15,7 @@ export class UserService {
       const sub = this.afAuth.user.subscribe(user => {
         console.log(user)
         if (user){
-          this.router.navigate(['login']);
+          this.router.navigate(['home']);
         } else {
           this.router.navigate(['login']);
         }

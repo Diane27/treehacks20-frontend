@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TriggerFormComponent } from './trigger-form/trigger-form.component'
 import { SymptomformComponent } from './symptomform/symptomform.component'
@@ -20,25 +20,46 @@ export class TabsPage {
 
   async openmod_one() {
     const modal = await this.modalController.create({
-      component: TriggerFormComponent
+      component: TriggerFormComponent,
+      componentProps: {
+        onClose: this.onClose.bind(this)
+      }
     });
+
     await modal.present();
+    
   }
 
   async openmod_two() {
     const modal = await this.modalController.create({
-      component: SleepFormComponent
+      component: SleepFormComponent,
+      componentProps: {
+        onClose: this.onClose.bind(this)
+      }
     });
 
     await modal.present();
+  }
+
+  onClose(data) {
+    this.modalController.dismiss(data);
   }
 
   async openmod_three() {
     const modal = await this.modalController.create({
-      component: SymptomformComponent
+      component: SymptomformComponent,
+      componentProps: {
+        onClose: this.onClose.bind(this)
+      }
     });
 
     await modal.present();
   }
+
+
+
+
+
+
 
 }
