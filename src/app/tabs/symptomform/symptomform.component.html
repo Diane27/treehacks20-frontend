@@ -1,10 +1,19 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Symptom Report</ion-title>
+    <ion-buttons slot="end">
+      <ion-button onclick="dismissModal()">Submit</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-item>
   <ion-label>Time</ion-label>
   <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
 </ion-item>
 
 <ion-item>
-  <ion-label>Symptoms</ion-label>
+  <ion-label>Symptom</ion-label>
   <ion-select interface="popover">
     <ion-select-option value="hotflash">Hot Flash</ion-select-option>
     <ion-select-option value="insomnia">Insomnia</ion-select-option>

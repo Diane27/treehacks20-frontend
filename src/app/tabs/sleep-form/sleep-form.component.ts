@@ -12,3 +12,24 @@ export class SleepFormComponent implements OnInit {
   ngOnInit() {}
 
 }
+
+// // code to add submit button
+//
+// let currentModal = null;
+//     const button = document.querySelector('ion-button');
+//     button.addEventListener('click', createModal);
+//
+//     async function createModal() {
+//       const modal = await modalController.create({
+//         component: 'modal-content'
+//       });
+//
+//       await modal.present();
+//       currentModal = modal;
+//     }
+//
+// function dismissModal() {
+//   if (currentModal) {
+//     currentModal.dismiss().then(() => { currentModal = null; });
+//   }
+// }
