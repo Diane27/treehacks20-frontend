@@ -7,24 +7,27 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-item>
-  <ion-label>Time</ion-label>
-  <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
-</ion-item>
+<ion-content>
+    <ion-item>
+      <ion-label>Time</ion-label>
+      <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z" [(ngModel)]= "triggertime"></ion-datetime>
+    </ion-item>
 
-<ion-item>
-  <ion-label>Trigger</ion-label>
-  <ion-select interface="popover">
-    <ion-select-option value="Stress">Stress</ion-select-option>
-    <ion-select-option value="Mood">Mood</ion-select-option>
-    <ion-select-option value="Caffeine">Caffeine</ion-select-option>
-    <ion-select-option value="Smoking">Smoking</ion-select-option>
-    <ion-select-option value="Warm_environment">Warm Environment</ion-select-option>
-    <ion-select-option value="Alcohol">Alcohol</ion-select-option>
-    <ion-select-option value="Sugar">Sugar</ion-select-option>
-    <ion-select-option value="Spicy_food">Spicy Food</ion-select-option>
-    <ion-select-option value="Tight_clothing">Tight Clothing</ion-select-option>
-    <ion-select-option value="Dehydration">Dehydration</ion-select-option>
-    <ion-select-option value="Bending_over">Bending Over</ion-select-option>
-  </ion-select>
-</ion-item>
+    <ion-item>
+      <ion-label>Trigger</ion-label>
+      <ion-select interface="popover" [(ngModel)]= "triggerval" [selectedText]="triggerval">
+        <ion-select-option value="Stress">Stress</ion-select-option>
+        <ion-select-option value="Mood">Mood</ion-select-option>
+        <ion-select-option value="Caffeine">Caffeine</ion-select-option>
+        <ion-select-option value="Smoking">Smoking</ion-select-option>
+        <ion-select-option value="Warm_environment">Warm Environment</ion-select-option>
+        <ion-select-option value="Alcohol">Alcohol</ion-select-option>
+        <ion-select-option value="Sugar">Sugar</ion-select-option>
+        <ion-select-option value="Spicy_food">Spicy Food</ion-select-option>
+        <ion-select-option value="Tight_clothing">Tight Clothing</ion-select-option>
+        <ion-select-option value="Dehydration">Dehydration</ion-select-option>
+        <ion-select-option value="Bending_over">Bending Over</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button (click)="submitval()">Submit</ion-button>
+</ion-content>
