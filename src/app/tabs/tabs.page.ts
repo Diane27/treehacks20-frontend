@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { TriggerFormComponent } from './trigger-form/trigger-form.component'
 import { SymptomformComponent } from './symptomform/symptomform.component'
+import { SleepFormComponent } from './sleep-form/sleep-form.component'
 
 @Component({
   selector: 'app-tabs',
@@ -26,7 +27,7 @@ export class TabsPage {
 
   async openmod_two() {
     const modal = await this.modalController.create({
-      component: SymptomformComponent
+      component: SleepFormComponent
     });
 
     await modal.present();
@@ -34,7 +35,7 @@ export class TabsPage {
 
   async openmod_three() {
     const modal = await this.modalController.create({
-      component: TriggerFormComponent
+      component: SymptomformComponent
     });
 
     await modal.present();

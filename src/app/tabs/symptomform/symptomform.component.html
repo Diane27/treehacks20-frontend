@@ -1,4 +1,16 @@
 <ion-item>
-  <ion-label>MM DD YY</ion-label>
-  <ion-datetime displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
+  <ion-label>Time</ion-label>
+  <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z"></ion-datetime>
+</ion-item>
+
+<ion-item>
+  <ion-label>Symptoms</ion-label>
+  <ion-select interface="popover">
+    <ion-select-option value="hotflash">Hot Flash</ion-select-option>
+    <ion-select-option value="insomnia">Insomnia</ion-select-option>
+    <ion-select-option value="dizziness">Dizziness</ion-select-option>
+    <ion-select-option value="jointpain">Joint Pain</ion-select-option>
+    <ion-select-option value="anxiety">Anxiety</ion-select-option>
+    <ion-select-option value="depression">Depression</ion-select-option>
+  </ion-select>
 </ion-item>
