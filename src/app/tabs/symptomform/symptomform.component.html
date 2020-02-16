@@ -7,19 +7,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-item>
-  <ion-label>Time</ion-label>
-  <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z" [(ngModel)]= "symptomtime" (ionChange)="onChangeSymptom()"></ion-datetime>
-</ion-item>
+<ion-content>
+  <ion-item>
+    <ion-label>Time</ion-label>
+    <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z" [(ngModel)]= "symptomtime"></ion-datetime>
+  </ion-item>
 
-<ion-item>
-  <ion-label>Symptom</ion-label>
-  <ion-select interface="popover" [(ngModel)]= "symptomval" [selectedText]="symptomval" (ionChange)="onChangeValue()">
-    <ion-select-option value="hotflash">Hot Flash</ion-select-option>
-    <ion-select-option value="insomnia">Insomnia</ion-select-option>
-    <ion-select-option value="dizziness">Dizziness</ion-select-option>
-    <ion-select-option value="jointpain">Joint Pain</ion-select-option>
-    <ion-select-option value="anxiety">Anxiety</ion-select-option>
-    <ion-select-option value="depression">Depression</ion-select-option>
-  </ion-select>
-</ion-item>
+  <ion-item>
+    <ion-label>Symptom</ion-label>
+    <ion-select interface="popover" [(ngModel)]= "symptomval" [selectedText]="symptomval">
+      <ion-select-option value="hotflash">Hot Flash</ion-select-option>
+      <ion-select-option value="insomnia">Insomnia</ion-select-option>
+      <ion-select-option value="dizziness">Dizziness</ion-select-option>
+      <ion-select-option value="jointpain">Joint Pain</ion-select-option>
+      <ion-select-option value="anxiety">Anxiety</ion-select-option>
+      <ion-select-option value="depression">Depression</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button (click)="submitdata()">Submit</ion-button>
+</ion-content>

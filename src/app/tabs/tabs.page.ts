@@ -25,6 +25,10 @@ export class TabsPage {
         onClose: this.onClose.bind(this)
       }
     });
+    modal.onDidDismiss()
+      .then((data) => {
+        console.log(data['data']);
+    });
 
     await modal.present();
 
@@ -54,6 +58,11 @@ export class TabsPage {
       componentProps: {
         onClose: this.onClose.bind(this)
       }
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        console.log(data['data']);
     });
 
     await modal.present();
