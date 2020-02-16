@@ -17,12 +17,12 @@ export class SymptomformComponent implements OnInit {
     this.onClose()
   }
 
-  onChange(value) {
+  onChangeSymptom(value) {
     console.log("This is the value:", this.symptomtime);
     this.modalController.dismiss(this.symptomtime);
   }
 
-  onChange(value) {
+  onChangeValue(value) {
     console.log("This is the value:", this.symptomval);
     this.modalController.dismiss(this.symptomval);
   }

@@ -17,12 +17,12 @@ export class TriggerFormComponent implements OnInit {
     this.onClose()
   }
 
-  onChange(value) {
+  onChangeValue(value) {
     console.log("This is the value:", this.triggerval);
     this.modalController.dismiss(this.triggerval);
   }
 
-  onChange(value) {
+  onChangeTime(value) {
     console.log("This is the value:", this.triggertime);
     this.modalController.dismiss(this.triggertime);
   }

@@ -9,12 +9,12 @@
 
 <ion-item>
   <ion-label>Time</ion-label>
-  <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z" [(ngModel)]= "triggertime" [selectedText]="triggertime" (ionChange)="onChange()"></ion-datetime>
+  <ion-datetime display-format="h:mm A" picker-format="h:mm A" value="1990-02-19T07:43Z" [(ngModel)]= "triggertime" (ionChange)="onChangeTime()"></ion-datetime>
 </ion-item>
 
 <ion-item>
   <ion-label>Trigger</ion-label>
-  <ion-select interface="popover" [(ngModel)]= "triggerval" [selectedText]="triggerval" (ionChange)="onChange()">
+  <ion-select interface="popover" [(ngModel)]= "triggerval" [selectedText]="triggerval" (ionChange)="onChangeValue()">
     <ion-select-option value="Stress">Stress</ion-select-option>
     <ion-select-option value="Mood">Mood</ion-select-option>
     <ion-select-option value="Caffeine">Caffeine</ion-select-option>
