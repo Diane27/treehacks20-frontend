@@ -12,7 +12,7 @@ export class Tab1Page implements OnInit {
 
   hotflashchart: any;
   sleepdatachart: any;
-
+  toptriggers: any;
 
   constructor() {}
 
@@ -59,6 +59,8 @@ export class Tab1Page implements OnInit {
       });
     }).bind(this))
 
+    getTopTriggers((triggers => this.toptriggers = triggers.join('\n')).bind(this))
+
     getSleepData(((labels, dataPoints) => {
       this.sleepdatachart = new Chart('sleepdata', {
         type: 'line',
@@ -103,7 +105,7 @@ function getHotFlashData(callback) {
   var labels = [];
   var currentTime = begin;
   for (var i=0; i<histogram.length; i++) {
-    labels.push((currentTime.getMonth()+1).toString() + ":" + currentTime.getDate());
+    labels.push((currentTime.getMonth()+1).toString() + "/" + currentTime.getDate());
     currentTime.setDate(currentTime.getDate()+1);
   }
 
@@ -115,6 +117,30 @@ function getHotFlashData(callback) {
     }
 
     callback(labels, histogram);
+  })
+}
+
+function getTopTriggers(callback) {
+  var events = [/* Symptoms*/"Hot flash","Insomnia","Dizziness","Joint pain","Anxiety","Depression",/*Triggers*/"Stress","Mood","Caffeine","Smoking","Warm environment","Alcohol","Sugar","Spicy food","Tight clothing","Dehydration","Bending over"];
+
+  var db = new Database();
+  db.getAggregate((docs) => {
+    console.log(docs);
+
+    if (docs.length<1) {
+      callback(["No data"]);
+      return;
+    }
+
+    var averages = [];
+    for (var property in docs[0]) {
+      averages.push([events[property], docs[0][1]/docs[0][0]]);
+    }
+
+    averages.sort((a, b) => b[1]-a[1]);
+
+    
+    callback(averages.slice(0, 3).map(a => a[0]));
   })
 }
 
