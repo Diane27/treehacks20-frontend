@@ -12,7 +12,7 @@ export class Tab1Page implements OnInit {
 
   hotflashchart: any;
   sleepdatachart: any;
-
+  toptriggers: any;
 
   constructor() {}
 
@@ -59,32 +59,36 @@ export class Tab1Page implements OnInit {
       });
     }).bind(this))
 
-    this.sleepdatachart = new Chart('sleepdata', {
-      type: 'line',
-      data: {
-        labels: labels, // your labels array
-        datasets: [
-          {
-            data: dataPoints, // your data array
-            borderColor: '#00AEFF',
-            fill: false
-          }
-        ]
-      },
-      options: {
-        legend: {
-          display: false
+    getTopTriggers((triggers => this.toptriggers = triggers.join('\n')).bind(this))
+
+    getSleepData(((labels, dataPoints) => {
+      this.sleepdatachart = new Chart('sleepdata', {
+        type: 'line',
+        data: {
+          labels: labels, // your labels array
+          datasets: [
+            {
+              data: dataPoints, // your data array
+              borderColor: '#00AEFF',
+              fill: false
+            }
+          ]
         },
-        scales: {
-          xAxes: [{
-            display: true
-          }],
-          yAxes: [{
-            display: true
-          }],
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              display: true
+            }],
+            yAxes: [{
+              display: true
+            }],
+          }
         }
-      }
-    });
+      });
+    }).bind(this))
   }
 
 }
@@ -95,22 +99,20 @@ function getHotFlashData(callback) {
   var db = new Database();
   var end = new Date(Date.now());
   var begin = end;
-  begin.setHours(begin.getHours()-12);
+  begin.setDate(begin.getDate()-14);
 
-  var histogram = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  var histogram = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   var labels = [];
   var currentTime = begin;
   for (var i=0; i<histogram.length; i++) {
-    labels.push(currentTime.getHours() + ":" + currentTime.getMinutes());
-    currentTime.setHours(currentTime.getHours()+2);
+    labels.push((currentTime.getMonth()+1).toString() + "/" + currentTime.getDate());
+    currentTime.setDate(currentTime.getDate()+1);
   }
 
   db.getRangeData(begin, end, (docs) => {
-    console.log(docs);
-
     for (var i=0; i<docs.length; i++) {
       if (docs[i].type==0) {
-        histogram[docs[i].ts.getHours()-begin.getHours()] += 1;
+        histogram[docs[i].ts.getDate()-begin.getDate()] += 1;
       }
     }
 
@@ -118,19 +120,56 @@ function getHotFlashData(callback) {
   })
 }
 
+function getTopTriggers(callback) {
+  var events = [/* Symptoms*/"Hot flash","Insomnia","Dizziness","Joint pain","Anxiety","Depression",/*Triggers*/"Stress","Mood","Caffeine","Smoking","Warm environment","Alcohol","Sugar","Spicy food","Tight clothing","Dehydration","Bending over"];
+
+  var db = new Database();
+  db.getAggregate((docs) => {
+    console.log(docs);
+
+    if (docs.length<1) {
+      callback(["No data"]);
+      return;
+    }
+
+    var averages = [];
+    for (var property in docs[0]) {
+      averages.push([events[property], docs[0][1]/docs[0][0]]);
+    }
+
+    averages.sort((a, b) => b[1]-a[1]);
+
+    
+    callback(averages.slice(0, 3).map(a => a[0]));
+  })
+}
+
 function getSleepData(callback) {
   var db = new Database();
   var end = new Date(Date.now());
   var begin = end;
-  begin.setDate(end.getDate()-14);
+  begin.setDate(begin.getDate()-14);
 
   db.getSleep((docs) => {
-    var sleeps = [];
+    console.log(docs);
+
+    var data = []
+
     for (var i=0; i<docs.length; i++) {
-      if (docs[i].ts >= begin && docs[i].ts <= end)
-        sleeps.push(docs[i]);
+      if (docs[i].ts>=begin && docs[i].ts<=end) {
+        data.push([docs[i].ts, docs[i].hoursSlept])
+      }
     }
 
-    callback(sleeps);
+    data.sort((a, b) => a[0]-b[0]);
+
+    var labels = []
+    var sleeps = []
+    for (var i=0; i<data.length; i++) {
+      labels.push(data[i][0]);
+      sleeps.push(data[i][1]);
+    }
+
+    callback(labels, sleeps);
   })
 }
