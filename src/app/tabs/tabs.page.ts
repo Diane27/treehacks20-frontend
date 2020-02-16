@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { TriggerFormComponent } from './trigger-form/trigger-form.component'
+import { SymptomformComponent } from './symptomform/symptomform.component'
 
 @Component({
   selector: 'app-tabs',
@@ -9,43 +11,33 @@ import { AlertController } from '@ionic/angular';
 export class TabsPage {
   fabOpen: boolean;
 
-  constructor(public alertController: AlertController) {}
+  constructor(public modalController: ModalController) {}
 
   open(){
     this.fabOpen = !this.fabOpen;
   }
 
   async openmod_one() {
-    const alert = await this.alertController.create({
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.',
-      buttons: ['OK']
+    const modal = await this.modalController.create({
+      component: TriggerFormComponent
     });
-
-    await alert.present();
+    await modal.present();
   }
 
   async openmod_two() {
-    const alert = await this.alertController.create({
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.',
-      buttons: ['OK']
+    const modal = await this.modalController.create({
+      component: SymptomformComponent
     });
 
-    await alert.present();
+    await modal.present();
   }
 
   async openmod_three() {
-    const alert = await this.alertController.create({
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.',
-      buttons: ['OK']
+    const modal = await this.modalController.create({
+      component: TriggerFormComponent
     });
 
-    await alert.present();
+    await modal.present();
   }
 
 }
