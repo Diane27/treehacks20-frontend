@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-sleep-form',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sleep-form.component.scss'],
 })
 export class SleepFormComponent implements OnInit {
-
+  @Input() onClose: () => void;
   constructor() { }
 
   ngOnInit() {}
+
+  dismiss() {
+    this.onClose()
+  }
 
 }
 
