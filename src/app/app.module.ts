@@ -13,6 +13,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { NgCalendarModule  } from 'ionic2-calendar';
+
 import { UserService } from './user.service';
 
 export function startup(userService: UserService) {
@@ -30,7 +32,8 @@ export function startup(userService: UserService) {
     IonicModule.forRoot(), 
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    NgCalendarModule
   ],
   providers: [
     StatusBar,
