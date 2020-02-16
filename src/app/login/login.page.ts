@@ -36,14 +36,14 @@ export class LoginPage implements OnInit {
   async login(){
     await this.afAuth.auth.signInWithEmailAndPassword( this.user.email, this.user.password)
     .then( user => {
-      this.router.navigate(['home/tabs'])
+      this.router.navigate(['home'])
     })
   }
 
   async createAccount() {
     await this.afAuth.auth.createUserWithEmailAndPassword( this.user.email, this.user.password)
     .then( user => {
-      this.router.navigate(['home/tabs']);
+      this.router.navigate(['home']);
     })
     console.log(this.activeUser);
   }
